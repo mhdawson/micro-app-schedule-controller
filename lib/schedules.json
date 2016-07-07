@@ -1,0 +1,5 @@
+[ { "label": "livingOn", "schedule": "30 20 * * *", "commands": [ { "delay": 0, "topic": "house/x10", "message": "A,1,1" } ] },
+  { "label": "allLights", "schedule": "30 23 * * *", "commands": [ {                   "topic": "house/x10", "message": "A,1,0" },
+                                                                     { "delay": 5000,  "topic": "house/x10", "message": "A,2,0" },
+                                                                     { "delay": 10000, "topic": "house/x10", "message": "A,5,0" } ] }
+]
