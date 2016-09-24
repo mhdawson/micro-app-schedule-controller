@@ -7,9 +7,9 @@ Current the GUI only provides 2 pages. One that
 shows the entries configured and one that shows
 the contents of the log.  
 
-It is intended that the GUI will allow the 
+It is intended that the GUI will allow the
 scheduled entries to be configured but currently
-its display only:
+it is display only:
 
 ![schedules](https://github.com/mhdawson/micro-app-schedule-controller/blob/master/pictures/schedules.jpg?raw=true)
 ![log](https://github.com/mhdawson/micro-app-schedule-controller/blob/master/pictures/log.jpg?raw=true)
@@ -30,7 +30,7 @@ The configuration entries that must be updated include:
   the key and associated certificates for a client which
   is authorized to connect to the mqtt server.
 * eventLogPrefix - directory in which log will be written
-* localtion - object with lat and lon fields that specify
+* location - object with lat and lon fields that specify
   the location to be used in order to determine suntimes
 * windowsSize - object with x and y specifying the size of the
   window for the GUI.
@@ -48,14 +48,29 @@ A sample file is as follows:
 }
 ```
 
-In addition the scheduled entries are configured in the file called
+In addition to the configuration in the config.json file, the
+scheduled entries are configured in the file called
 schedules.json.  It is intended that this file be configurable
 through the GUI at some point but for now it is manually edited
 and the GUI has one page which shows the entries configured.  The
-format of the file is as follows:
+format of the file is an array of objects with the following fields:
 
+* label - the label assigned to the schedule entry
+* schedule - a cron string specifying the time for the schedule entry
+  to be invoked, or one of sunset or sunrise.
+* rand - optional randomization to the time specified in minutes.
+  A random amount between 0 and the value specified will be added
+  to the time for when the entry will be invoked.
+* commands - an array of command objects as described below.
 
+The format of the objects in the array of commands is as follows:
 
+* delay - delay in milliseconds after the schedule entry is invoked
+  that the command will run.
+* topic - the mqtt topic that will be posted to when the command is
+  run.
+* message - the message that will be posted to the topic when the
+  command is run.
 
 A sample shedules.json file is as follows:
 
@@ -81,8 +96,8 @@ npm install micro-app-schedule-controller
 
 # Running
 
-To run the ping-monitor micro-app, add node.js to your
-path (currently required 4.x or better) and then run:
+To run the schedule-controller micro-app, add node.js to your
+path (currently requires 4.x or better) and then run:
 
 ```
 npm start
@@ -100,4 +115,3 @@ See the documentation on the micro-app-framework for more information
 on general configuration options (in addition to those documented in
 this readme) that are availble (ex using tls,
 authentication, serverPort, etc).
-
