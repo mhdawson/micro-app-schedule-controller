@@ -1,0 +1,8 @@
+{
+  "title": "Scheduler",
+  "serverPort": 3000,
+  "mqttServerUrl": "tcp://10.1.1.186:1883",
+  "eventLogPrefix": "/home/user1/controller/micro-app-schedule-controller",
+  "location": { "lat": 45.4215, "lon": -75.6972 },
+  "windowSize": {"x": 320, "y": 274 }
+}
